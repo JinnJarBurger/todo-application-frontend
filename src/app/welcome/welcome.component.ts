@@ -12,12 +12,12 @@ import {ActivatedRoute, RouterLink} from "@angular/router";
 })
 export class WelcomeComponent implements OnInit {
 
-  name = ''
+  name = '';
 
   constructor(private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.name = this.route.snapshot.params['name']
+    this.name = this.route.snapshot.params['name'];
   }
 }

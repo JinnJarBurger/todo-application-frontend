@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
   selector: 'app-error',
@@ -9,5 +9,5 @@ import { Component } from '@angular/core';
 })
 export class ErrorComponent {
 
-  errorMessage = 'An Error Occurred!'
+  errorMessage = 'An Error Occurred!';
 }
