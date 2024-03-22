@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {FormsModule} from "@angular/forms";
 import {NgIf} from "@angular/common";
 import {Router} from "@angular/router";
-import {AuthenticationService} from "../service/authentication.service";
+import {AuthenticationService} from "../../service/authentication.service";
 
 @Component({
   selector: 'app-login',

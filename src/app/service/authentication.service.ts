@@ -1,11 +1,14 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationService {
+export class AuthenticationService implements OnInit {
 
   constructor() {
+  }
+
+  ngOnInit(): void {
   }
 
   authenticate(username: string, password: string) {
@@ -21,6 +24,10 @@ export class AuthenticationService {
   isUserLoggedIn() {
     let user = sessionStorage.getItem('authenticatedUser');
 
-    return user !== null;
+    return !!user;
+  }
+
+  logout() {
+    sessionStorage.removeItem('authenticatedUser');
   }
 }
