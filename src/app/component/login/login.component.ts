@@ -13,7 +13,7 @@ import {AuthenticationService} from "../../service/authentication.service";
 })
 export class LoginComponent {
 
-  username = 'jinnjarburger';
+  username = 'JinnJarBurger';
   password = '';
   errorMessage = 'Invalid Credentials';
   invalidLogin = false;
@@ -25,6 +25,6 @@ export class LoginComponent {
   handleLogin() {
     this.invalidLogin = !this.authenticateService.authenticate(this.username, this.password);
 
-    if (!this.invalidLogin) this.router.navigate(['welcome', this.username]);
+    if (!this.invalidLogin) this.router.navigate(['welcome', this.username]).catch((err) => console.log(err));
   }
 }

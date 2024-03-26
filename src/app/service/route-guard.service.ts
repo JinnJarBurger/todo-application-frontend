@@ -16,7 +16,7 @@ class RouteGuard {
       return true;
     }
 
-    this.router.navigate(['login'])
+    this.router.navigate(['login']).catch((err) => console.log(err));
 
     return false;
   }
