@@ -15,7 +15,7 @@ export class WelcomeDataService {
   constructor(private http: HttpClient) {
   }
 
-  executeHelloWorld() {
-    return this.http.get<HelloWorld>('http://localhost:8080/');
+  executeHelloWorldWithPathVariable(name: string) {
+    return this.http.get<HelloWorld>(`http://localhost:8080/${name}`);
   }
 }
