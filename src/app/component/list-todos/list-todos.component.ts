@@ -1,5 +1,6 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DatePipe, NgForOf, UpperCasePipe} from "@angular/common";
+import {TodoDataService} from "../../service/todo-data.service";
 
 @Component({
   selector: 'app-list-todos',
@@ -12,21 +13,27 @@ import {DatePipe, NgForOf, UpperCasePipe} from "@angular/common";
   templateUrl: './list-todos.component.html',
   styleUrl: './list-todos.component.css'
 })
-export class ListTodosComponent {
+export class ListTodosComponent implements OnInit {
 
-  todos = [
-    new Todo(1, 'not empty 1', false, new Date()),
-    new Todo(2, 'not empty 2', false, new Date()),
-    new Todo(3, 'not empty 3', false, new Date()),
-    new Todo(4, 'not empty 4', false, new Date())
-  ];
+  todos: Todo[] | undefined;
+
+  constructor(private todoService: TodoDataService) {
+  }
+
+  ngOnInit(): void {
+    this.todoService.retrieveAllTodos('adnan').subscribe({
+      next: (response) => this.todos = response,
+      error: (err) => console.log(err)
+    })
+  }
 }
 
 export class Todo {
 
   constructor(public id: number,
-              public description: string,
-              public done: boolean,
-              public targetDate: Date) {
+              public username: String,
+              public description: String,
+              public targetDate: Date,
+              public done: boolean) {
   }
 }

@@ -23,10 +23,10 @@ export class WelcomeComponent implements OnInit {
   }
 
   getWelcomeMessage() {
-    this.service.executeHelloWorldWithPathVariable(this.name).subscribe({
-      next: (response) => this.name = response.helloWorld,
-      error: (e) => this.name = e.error.message
-    });
+    // this.service.executeHelloWorldWithPathVariable(this.name).subscribe({
+    //   next: (response) => this.name = response.helloWorld,
+    //   error: (e) => this.name = e.error.message
+    // });
   }
 
   handleSuccessfulResponse() {
