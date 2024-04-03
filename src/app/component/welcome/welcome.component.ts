@@ -13,7 +13,7 @@ import {WelcomeDataService} from "../../service/welcome-data.service";
 })
 export class WelcomeComponent implements OnInit {
 
-  name = '';
+  name: string;
 
   constructor(private route: ActivatedRoute, private service: WelcomeDataService) {
   }

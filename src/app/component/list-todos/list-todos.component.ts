@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {DatePipe, NgForOf, UpperCasePipe} from "@angular/common";
+import {DatePipe, NgForOf, NgIf, UpperCasePipe} from "@angular/common";
 import {TodoDataService} from "../../service/todo-data.service";
+import {Router} from "@angular/router";
+import {Todo} from "../../model/todo.model";
 
 @Component({
   selector: 'app-list-todos',
@@ -8,32 +10,40 @@ import {TodoDataService} from "../../service/todo-data.service";
   imports: [
     NgForOf,
     DatePipe,
-    UpperCasePipe
+    UpperCasePipe,
+    NgIf
   ],
   templateUrl: './list-todos.component.html',
   styleUrl: './list-todos.component.css'
 })
 export class ListTodosComponent implements OnInit {
 
-  todos: Todo[] | undefined;
+  todos: Todo[];
+  message: string;
 
-  constructor(private todoService: TodoDataService) {
+  constructor(private todoService: TodoDataService, private router: Router) {
   }
 
   ngOnInit(): void {
+    this.refreshTodos();
+  }
+
+  refreshTodos() {
     this.todoService.retrieveAllTodos('adnan').subscribe({
       next: (response) => this.todos = response,
       error: (err) => console.log(err)
+    });
+  }
+
+  deleteTodo(id: number) {
+    this.todoService.deleteTodo('adnan', id).subscribe(() => {
+      this.message = `Successfully Deleted Todo ${id}!`;
+      console.log(this.message);
+      this.refreshTodos();
     })
   }
-}
 
-export class Todo {
-
-  constructor(public id: number,
-              public username: String,
-              public description: String,
-              public targetDate: Date,
-              public done: boolean) {
+  updateTodo(id: number) {
+    this.router.navigate(['update', id]).catch(err => console.log(err))
   }
 }
