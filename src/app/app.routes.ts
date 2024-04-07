@@ -13,7 +13,7 @@ export const routes: Routes = [
   {path: 'logout', component: LogoutComponent},
   {path: 'welcome/:name', component: WelcomeComponent, canActivate: [RouteGuardService]},
   {path: 'todos', component: ListTodosComponent, canActivate: [RouteGuardService]},
-  {path: 'update/:id', component: TodoComponent, canActivate: [RouteGuardService]},
+  {path: 'todo/:id', component: TodoComponent, canActivate: [RouteGuardService]},
 
   {path: '**', component: ErrorComponent, canActivate: [RouteGuardService]}
 ];

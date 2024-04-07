@@ -1,20 +1,25 @@
 <h1>Todo</h1>
 
 <div class="container">
+  <div class="alert alert-danger" *ngIf="todoForm.dirty && todoForm.invalid">Enter valid values</div>
 
-  <fieldset class="mb-3">
-    <label class="form-label">Description</label>
-    <input type="text" [(ngModel)]="todo.description" class="form-control" name="description"
-           required="required">
-  </fieldset>
+  <form (ngSubmit)="!todoForm.invalid && saveOrUpdateTodo()" #todoForm="ngForm">
+    <fieldset class="mb-3">
+      <label class="form-label">Description</label>
+      <input type="text" [(ngModel)]="todo && todo.description" class="form-control" name="description"
+             required="required" minlength="5" #todoDescription="ngModel">
+      <div class="text-danger" *ngIf="todoDescription.dirty && todoDescription.invalid">Enter at least 5 characters</div>
+    </fieldset>
 
-  <fieldset class="mb-3">
-    <label class="form-label">TargetDate</label>
-    <input type="date"
-           [ngModel]="todo.targetDate | date:'yyyy-MM-dd'"
-           (ngModelChange)="todo.targetDate = $event"
-           class="form-control" name="date" required="required">
-  </fieldset>
+    <fieldset class="mb-3">
+      <label class="form-label">TargetDate</label>
+      <input type="date"
+             [ngModel]="todo && todo.targetDate | date:'yyyy-MM-dd'"
+             (ngModelChange)="todo ? todo.targetDate = $event : ''"
+             class="form-control" name="date" required="required" #todoTargetDate="ngModel">
+      <div class="text-danger" *ngIf="todoTargetDate.dirty && todoTargetDate.invalid">Target Date is required</div>
+    </fieldset>
 
-  <button class="btn btn-success" (click)="saveTodo()">Save</button>
+    <button type="submit" class="btn btn-success">Save</button>
+  </form>
 </div>

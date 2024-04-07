@@ -38,12 +38,15 @@ export class ListTodosComponent implements OnInit {
   deleteTodo(id: number) {
     this.todoService.deleteTodo('adnan', id).subscribe(() => {
       this.message = `Successfully Deleted Todo ${id}!`;
-      console.log(this.message);
       this.refreshTodos();
     })
   }
 
   updateTodo(id: number) {
-    this.router.navigate(['update', id]).catch(err => console.log(err))
+    this.router.navigate(['todo', id]).catch(err => console.log(err))
+  }
+
+  createTodo() {
+    this.router.navigate(['todo', 0]).catch(err => console.log(err));
   }
 }

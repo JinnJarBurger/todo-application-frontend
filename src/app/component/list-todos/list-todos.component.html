@@ -20,11 +20,20 @@
       <td>{{ todo.done }}</td>
       <td>
         <div class="col">
+          <button (click)="updateTodo(todo.id)" class="btn btn-outline-success m-1">Update</button>
           <button (click)="deleteTodo(todo.id)" class="btn btn-warning m-1">Delete</button>
-          <button (click)="updateTodo(todo.id)" class="btn btn-success m-1">Update</button>
         </div>
       </td>
     </tr>
     </tbody>
   </table>
+
+  <div class="col">
+    <button (click)="createTodo()" class="btn btn-success">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+      </svg>
+      Add
+    </button>
+  </div>
 </div>

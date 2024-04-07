@@ -13,8 +13,8 @@ import {AuthenticationService} from "../../service/authentication.service";
 })
 export class LoginComponent {
 
-  username = 'JinnJarBurger';
-  password = '';
+  username = 'jinnjar';
+  password = 'Adnanrocks247';
   errorMessage = 'Invalid Credentials';
   invalidLogin = false;
 
@@ -23,8 +23,17 @@ export class LoginComponent {
   }
 
   handleLogin() {
-    this.invalidLogin = !this.authenticateService.authenticate(this.username, this.password);
-
-    if (!this.invalidLogin) this.router.navigate(['welcome', this.username]).catch((err) => console.log(err));
+    this.authenticateService.executeBasicAuthentication(this.username, this.password).subscribe(
+      {
+        next: () => {
+          this.invalidLogin = false;
+          this.router.navigate(['welcome', this.username]).catch((err) => console.log(err));
+        },
+        error: (err) => {
+          this.invalidLogin = true;
+          console.log(err);
+        }
+      }
+    )
   }
 }
