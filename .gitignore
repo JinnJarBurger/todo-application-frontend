@@ -11,6 +11,7 @@ yarn-error.log
 
 # IDEs and editors
 .idea/
+.fleet/
 .project
 .classpath
 .c9/

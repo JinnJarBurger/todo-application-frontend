@@ -1,4 +1,4 @@
-import {Injectable, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BasicAuth} from "../model/basic-auth.model";
 import {map} from "rxjs";
@@ -11,12 +11,24 @@ export const AUTHENTICATED_USER = 'authenticatedUser';
   providedIn: 'root'
 })
 
-export class AuthenticationService implements OnInit {
+export class AuthenticationService {
 
   constructor(private http: HttpClient) {
   }
 
-  ngOnInit(): void {
+  executeJwtAuthentication(username: string, password: string) {
+    return this.http.post<any>(`${API_URL}/authenticate`, {
+      username,
+      password
+    }).pipe(
+      map(
+        resp => {
+        sessionStorage.setItem(AUTHENTICATED_USER, username);
+        sessionStorage.setItem(AUTHENTICATED_TOKEN, `Bearer ${resp.token}`);
+
+        return resp;
+      }),
+    );
   }
 
   executeBasicAuthentication(username: string, password: string) {

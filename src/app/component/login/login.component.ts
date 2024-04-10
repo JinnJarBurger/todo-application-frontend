@@ -23,7 +23,7 @@ export class LoginComponent {
   }
 
   handleLogin() {
-    this.authenticateService.executeBasicAuthentication(this.username, this.password).subscribe(
+    this.authenticateService.executeJwtAuthentication(this.username, this.password).subscribe(
       {
         next: () => {
           this.invalidLogin = false;
